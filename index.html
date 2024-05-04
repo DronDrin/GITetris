@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/v0_1_3/zeros.css">
+    <link rel="stylesheet" href="css/v0_1_3/styles.css">
+    <script src="js/v0_1_3/utilities.js"></script>
+    <script src="js/v0_1_3/shapeList.js"></script>
+    <script src="js/v0_1_3/shapes.js"></script>
+    <script src="js/v0_1_3/index.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sanchez:ital@0;1&display=swap" rel="stylesheet">
+    <title>Genshin tetris</title>
+</head>
+
+<body>
+    <template id="showcase-poison">
+        <div class="shop__poison poison">
+            <ul class="poison__types-list">
+                <!-- <li class="poison__type">Wisdom</li> -->
+            </ul>
+            <ul class="poison__characteristics-list">
+                <!-- <li class="poison__characteristic">Endurance</li> -->
+            </ul>
+            <div class="poison__filler"></div>
+            <div class="poison__lvl">level
+                <div class="poison__lvl-index"></div>
+            </div>
+            <div class="poison__cost">costs
+                <div class="poison__amount"></div>
+            </div>
+            <ul class="poison__type-imgs">
+                <!-- <img src="content/images/effectTypes/1.png" alt="" class="poison__type-img"> -->
+            </ul>
+            <div class="poison__controls">
+                <img src="content/images/back.webp" alt="stop selling" class="poison__remove poison__control">
+                <img src="content/images/delete.webp" alt="remove" class="poison__delete poison__control">
+            </div>
+        </div>
+    </template>
+    <template id="showcase-placeholder">
+        <div class="shop__poison poison poison_placeholder">
+            <div class="poison__add">
+            </div>
+        </div>
+    </template>
+    <template id="inventory-poison">
+        <div class="shop__poison poison poison_inventory">
+            <ul class="poison__types-list">
+                <!-- <li class="poison__type">Wisdom</li> -->
+            </ul>
+            <ul class="poison__characteristics-list">
+                <!-- <li class="poison__characteristic">Endurance</li> -->
+            </ul>
+            <div class="poison__filler"></div>
+            <div class="poison__lvl">level
+                <div class="poison__lvl-index"></div>
+            </div>
+            <div class="poison__cost">costs
+                <div class="poison__amount"></div>
+            </div>
+            <ul class="poison__type-imgs">
+                <!-- <img src="content/images/effectTypes/1.png" alt="" class="poison__type-img"> -->
+            </ul>
+            <div class="poison__controls">
+                <img src="content/images/delete.webp" alt="remove" class="poison__delete poison__control">
+            </div>
+        </div>
+    </template>
+    <div class="wrapper">
+        <header class="header hidden">
+        </header>
+        <main class="page">
+            <div class="home window">
+                <div class="home__container container">
+                    <div class="about">
+                        <h1 class="about__header">
+                            Genshin tetris
+                            <div class="beta-ver">alpha version</div>
+                        </h1>
+                        <p class="about__description">
+                            This is Genhsin tetris inspired by Alchemy event. Try it!
+                            <br><br>
+                            Controls: <br>
+                            Left/Right arrow - moving shapes <br>
+                            Down arrow - temporarily speed up falling shape <br>
+                            Up arrow - rotate shape <br>
+                            Space - choose another shape variant <br><br>
+                            Standard mode: <br>
+                            remove as much lines as you can, earn points, try to keep the field empty
+                        </p>
+                    </div>
+                    <div class="play">
+                        <div class="play__caption">Choose mode:</div>
+                        <div class="play__modes">
+                            <div class="play__mode card">
+                                <div class="card__name">Standard</div>
+                                <div class="card__description">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                    Officiis reiciendis </div>
+                                <div class="card__content">
+                                    <img src="" alt="Standard mode" class="card__img">
+                                </div>
+                            </div>
+                            <div class="play__mode card beta-blocked">
+                                <div class="card__name">Alchemy shop</div>
+                                <div class="card__description">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                    Officiis reiciendis </div>
+                                <div class="card__content">
+                                    <img src="" alt="Alchemy shop mode" class="card__img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tetris window window_fullscreen">
+                <div class="game">
+                    <canvas class="game__canvas"></canvas>
+                    <canvas class="game__canvas-lines"></canvas>
+                </div>
+                <div class="overlays">
+                    <div class="game-overlay overlays__overlay">
+                        <div class="points">
+                            points: <span class="points__count">4</span>
+                        </div>
+                        <div class="poison-info">
+                            <div class="diagram">
+                                <canvas class="diagram__canvas"></canvas>
+                            </div>
+                            <ul class="poison-info__characteristics-list">
+
+                            </ul>
+                        </div>
+                        <div class="currentShapeData hidden">
+                            <img src="" alt="" class="currentShapeData__type">
+                            <div class="currentShapeData__characteristic"></div>
+                        </div>
+                        <div class="controls">
+                            <div class="controls__right controls__control">
+                                <img src="content/images/controls/next.svg" alt=">" class="controls__img">
+                            </div>
+                            <div class="controls__left controls__control">
+                                <img src="content/images/controls/next.svg" alt=">" class="controls__img">
+                            </div>
+                            <div class="controls__down controls__control">
+                                <img src="content/images/controls/next.svg" alt=">" class="controls__img">
+                            </div>
+                            <div class="controls__variant controls__control">
+                                <img src="content/images/controls/change.svg" alt="var" class="controls__img">
+                            </div>
+                            <div class="controls__rotate controls__control">
+                                <img src="content/images/controls/rotate.svg" alt="rot" class="controls__img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lose-overlay overlays__overlay overlays__overlay_hidden">
+                        <div class="lose-overlay__content">
+                            <div class="lose-overlay__text">You lose!</div>
+                            <div class="lose-overlay__text-small">Your count: <span class="lose-overlay__count"></span>
+                            </div>
+                            <div class="lose-overlay__text-small">Your best count: <span
+                                    class="lose-overlay__best-count"></span></div>
+                            <div class="lose-overlay__retry lose-overlay__button">retry</div>
+                            <div class="lose-overlay__home lose-overlay__button">menu</div>
+                            <div class="lose-overlay__new-best hidden">new best!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="shop window window_fullscreen">
+                <div class="shop__container container">
+                    <div class="shop__top">
+                        <div class="shop__day">Day
+                            <span class="shop__day-index">5</span>
+                        </div>
+                        <div class="shop__money">
+                            Mora:
+                            <span class="shop__money-count">10.004.546</span>
+                        </div>
+                    </div>
+                    <div class="shop__showcase">
+                        <div class="shop__text-header">
+                            Selling now
+                        </div>
+                        <div class="shop__poisons-list shop__poisons-list_showcase">
+                        </div>
+                    </div>
+                    <div class="shop__cook arrowed-button">
+                        <div class="arrowed-button__text">Make new poison</div>
+                        <span class="arrowed-button__arrow"></span>
+                    </div>
+                    <div class="shop__poisons-inventory inventory">
+                        <div class="shop__poisons-list shop__poisons-list_inventory">
+                            <div class="shop__poison poison poison_inventory">
+                                <ul class="poison__types-list">
+                                    <!-- <li class="poison__type">Wisdom</li> -->
+                                </ul>
+                                <ul class="poison__characteristics-list">
+                                    <!-- <li class="poison__characteristic">Endurance</li> -->
+                                </ul>
+                                <div class="poison__filler"></div>
+                                <div class="poison__lvl">level
+                                    <div class="poison__lvl-index"></div>
+                                </div>
+                                <div class="poison__cost">costs
+                                    <div class="poison__amount"></div>
+                                </div>
+                                <ul class="poison__type-imgs">
+                                    <!-- <img src="content/images/effectTypes/1.png" alt="" class="poison__type-img"> -->
+                                </ul>
+                                <div class="poison__controls">
+                                    <img src="content/images/delete.webp" alt="remove" class="poison__delete poison__control">
+                                </div>
+                            </div>
+                            <div class="shop__poison poison poison_inventory">
+                                <ul class="poison__types-list">
+                                    <!-- <li class="poison__type">Wisdom</li> -->
+                                </ul>
+                                <ul class="poison__characteristics-list">
+                                    <!-- <li class="poison__characteristic">Endurance</li> -->
+                                </ul>
+                                <div class="poison__filler"></div>
+                                <div class="poison__lvl">level
+                                    <div class="poison__lvl-index"></div>
+                                </div>
+                                <div class="poison__cost">costs
+                                    <div class="poison__amount"></div>
+                                </div>
+                                <ul class="poison__type-imgs">
+                                    <!-- <img src="content/images/effectTypes/1.png" alt="" class="poison__type-img"> -->
+                                </ul>
+                                <div class="poison__controls">
+                                    <img src="content/images/delete.webp" alt="remove" class="poison__delete poison__control">
+                                </div>
+                            </div>
+                            <div class="shop__poison poison poison_inventory">
+                                <ul class="poison__types-list">
+                                    <!-- <li class="poison__type">Wisdom</li> -->
+                                </ul>
+                                <ul class="poison__characteristics-list">
+                                    <!-- <li class="poison__characteristic">Endurance</li> -->
+                                </ul>
+                                <div class="poison__filler"></div>
+                                <div class="poison__lvl">level
+                                    <div class="poison__lvl-index"></div>
+                                </div>
+                                <div class="poison__cost">costs
+                                    <div class="poison__amount"></div>
+                                </div>
+                                <ul class="poison__type-imgs">
+                                    <!-- <img src="content/images/effectTypes/1.png" alt="" class="poison__type-img"> -->
+                                </ul>
+                                <div class="poison__controls">
+                                    <img src="content/images/delete.webp" alt="remove" class="poison__delete poison__control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inventory__close"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="loading window window_active window_fullscreen">
+                <div class="loading__container container">
+                    <h2 class="loading__header">We're loading the resources <br> Please, wait...</h2>
+                    <div class="loading__bar bar bar_animated">
+                        <div class="bar__filler"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer hidden">
+            <div class="footer__container container">
+                <div class="footer__copyright">
+                    All rights reserved by miHoYo. See other <a href="attribution.html">attributions</a>
+                </div>
+                <div class="footer__contact">If you found any bug, please contact me: <a href="mailto:FunnyFunC@yandex.ru">FunnyFunC@yandex.ru</a>. Thank you!</div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
